@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ary only bitch</title>
+<style>
+body {
+  margin: 0;
+  height: 100vh;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  overflow: hidden;
+  background: #050814;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+/* نجوم صغيرة */
+.star-small {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: twinkle 5s linear infinite;
+}
+@keyframes twinkle {
+  0%,100% {opacity: 0.2;}
+  50% {opacity: 1;}
+}
+
+/* كلمات love u ary موزعة */
+.love-word {
+  position: absolute;
+  font-size: 12px;
+  color: #ffb6c1;
+  font-family: 'Arial', sans-serif;
+  opacity: 0.6;
+  animation: floatWords 15s linear infinite;
+}
+@keyframes floatWords {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-20px);}
+  100% {transform: translateY(0);}
+}
+
+/* النص المركزي */
+#greeting {
+  position: relative;
+  z-index: 10;
+  margin-top: 40px;
+  font-size: 20px;
+  line-height: 1.6;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Courier New', cursive;
+  color: #fff8dc;
+  text-shadow: 1px 1px 4px #ff69b4;
+  display: none;
+}
+
+/* عنوان مرحب */
+h1 {
+  margin: 20px 0 0 0;
+  font-size: 36px;
+  color: #fffacd;
+  text-shadow: 2px 2px 8px #ff69b4;
+}
+
+/* النجمة الكبيرة مع التوهج */
+.star-container {
+  position: relative;
+  display: inline-block;
+  margin-top: 40px;
+}
+
+.star-instruction {
+  font-size: 16px;
+  color: #ffb6c1;
+  margin-bottom: 10px;
+}
+
+.star {
+  width: 220px;
+  height: 220px;
+  cursor: pointer;
+  display: inline-block;
+  animation: glow 2s infinite alternate;
+}
+
+.star svg {
+  width: 100%;
+  height: 100%;
+  fill: #ffd700;
+  stroke: #fff8c2;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 20px #ffd700);
+  transition: transform 0.2s ease, filter 0.3s ease;
+}
+
+.star:hover svg {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px #fff700) drop-shadow(0 0 20px #ffd700);
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 15px #ffd700); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 35px #fff700); transform: scale(1.05);}
+  100% { filter: drop-shadow(0 0 15px #ffd700); transform: scale(1);}
+}
+</style>
+</head>
+<body>
+
+<h1>Welcome Ary!</h1>
+<h3>ارحبي بعدقلبي</h3>
+<div class="star-container">
+  <div class="star-instruction">My little one ary 💖 Click the star ⬇ 
+   * معناها اضغطي النجمة,عشان ما تبلشيني بالترجمة*
+  </div>
+  <div class="star" onclick="revealGreeting()">
+    <svg viewBox="0 0 24 24">
+      <polygon points="12,2 15,9 22,9 16,14 18,21 12,17 6,21 8,14 2,9 9,9"/>
+    </svg>
+  </div>
+</div>
+
+<div id="greeting">
+"To my sweetest and most cherished, I wish you days filled with accomplishments, laughter, and people who mirror your heart and spirit. May each sunrise bring you inspiration, and may your journey be adorned with joy and moments that light up your soul. My little Hello Kitty 💖, know that you are loved beyond measure. VG"
+</div>
+
+<script>
+// إنشاء النجوم الصغيرة في الخلفية
+for(let i=0; i<150; i++){
+  const s = document.createElement('div');
+  s.className='star-small';
+  s.style.top = Math.random()*100+'%';
+  s.style.left = Math.random()*100+'%';
+  s.style.width = s.style.height = (1 + Math.random()*2)+'px';
+  s.style.animationDuration = (3 + Math.random()*4)+'s';
+  document.body.appendChild(s);
+}
+
+// إنشاء كلمات love u ary موزعة
+for(let i=0; i<50; i++){
+  const w = document.createElement('div');
+  w.className='love-word';
+  w.innerText='love u ary';
+  w.style.top = Math.random()*100+'%';
+  w.style.left = Math.random()*100+'%';
+  w.style.fontSize = (10 + Math.random()*8)+'px';
+  w.style.animationDuration = (10 + Math.random()*10)+'s';
+  document.body.appendChild(w);
+}
+
+// عند الضغط على النجمة
+function revealGreeting(){
+  const g = document.getElementById('greeting');
+  g.style.display='block';
+  g.animate([{opacity:0, transform:'translateY(20px)'},{opacity:1, transform:'translateY(0)'}], {duration:500, easing:'ease-out'});
+}
+</script>
+</body>
+</html>
