@@ -1,92 +1,182 @@
-<!DOCTYPE html>
-<html lang="en">
+html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Secret Birthday Login</title>
+<title>AryONLYAry</title>
 <style>
- body {
+body {
   margin: 0;
-  min-height: 100vh;     /* يغطي الشاشة كحد أدنى لكن يسمح للصفحة بالتمدد */
+  min-height: 100vh;
   font-family: 'Segoe UI', Tahoma, sans-serif;
-  overflow-y: auto;      /* يسمح بالتمرير العمودي */
+  overflow: hidden;
   background: #050814;
   color: #fff;
   text-align: center;
   position: relative;
 }
 
-  .card {
-    background: rgba(11, 26, 43, 0.85);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(2,6,23,0.7);
-    text-align: center;
-  }
+/* === نجوم صغيرة متحركة === */
+.star-small {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.7;
+  animation: twinkle 5s linear infinite;
+}
 
-  input {
-    width: 220px;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 6px;
-    border: none;
-    font-size: 15px;
-  }
+@keyframes twinkle {
+  0%,100% {opacity: 0.2;}
+  50% {opacity: 1;}
+}
 
-  button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    background: linear-gradient(90deg,#0f3a6a,#082138);
-    color: #e9f0ff;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: transform 0.2s;
-  }
+/* === كلمات "love u ary" === */
+.love-word {
+  position: absolute;
+  font-size: 12px;
+  color: #ffb6c1;
+  font-family: 'Arial', sans-serif;
+  opacity: 0.6;
+  animation: floatWords 15s linear infinite;
+}
 
-  button:hover {
-    transform: scale(1.05);
-  }
+@keyframes floatWords {
+  0% {transform: translateY(0);}
+  50% {transform: translateY(-20px);}
+  100% {transform: translateY(0);}
+}
 
-  h1 {
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    font-size: 28px;
-    margin-bottom: 20px;
-  }
+/* === حقول تسجيل الدخول === */
+.login-container {
+  position: relative;
+  z-index: 10;
+  top: 50%;
+  transform: translateY(-60px);
+  opacity: 0;
+  display: inline-block;
+  text-align: center;
+  transition: opacity 1s ease, transform 1s ease;
+}
 
+input[type="text"], input[type="password"] {
+  padding: 12px 15px;
+  margin: 10px 0;
+  border: 2px solid #ffd700;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  background: #050814;
+  color: #fff;
+  box-shadow: 0 0 10px #ffd700;
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+  width: 250px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  box-shadow: 0 0 20px #ffd700;
+  transform: scale(1.02);
+}
+
+button {
+  padding: 12px 25px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  background: #ffd700;
+  color: #050814;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+/* === fade out effect للنجوم الصفراء === */
+.star-fade {
+  transition: opacity 1s ease;
+}
 </style>
 </head>
 <body>
 
-<div class="card">
-  <h1>Welcome, Arej!</h1>
-  <input type="text" id="username" placeholder="Username">
-  <input type="password" id="password" placeholder="Password">
-  <br>
-  <button onclick="checkLogin()">Log In</button>
+<div class="login-container" id="loginBox">
+  <h1>Login Ary</h1>
+  <input type="text" id="username" placeholder="Username"><br>
+  <input type="password" id="password" placeholder="Password"><br>
+  <button onclick="checkLogin()">Login</button>
 </div>
 
 <script>
+// === عند تحميل الصفحة: نجوم صفراء كثيفة مع fade-out ===
+window.addEventListener('load', () => {
+  const yellowStars = [];
+  for(let i=0; i<200; i++){
+    const s = document.createElement('div');
+    s.className = 'star-small star-fade';
+    s.style.top = Math.random()*100+'%';
+    s.style.left = Math.random()*100+'%';
+    s.style.width = s.style.height = (2 + Math.random()*3)+'px';
+    s.style.background = '#ffea00';
+    s.style.opacity = 0.9;
+    document.body.appendChild(s);
+    yellowStars.push(s);
+  }
+
+  // تحريك وصعود الصفحة تدريجيًا مع fade-in
+  const loginBox = document.getElementById('loginBox');
+  setTimeout(() => {
+    loginBox.style.opacity = 1;
+    loginBox.style.transform = 'translateY(0)';
+  }, 200);
+
+  // fade out للنجوم الصفراء
+  setTimeout(() => {
+    yellowStars.forEach(star => star.style.opacity = 0);
+  }, 500);
+
+  // إزالة النجوم الصفراء نهائياً بعد ثانية + إضافة نجوم بيضاء وكلمات
+  setTimeout(() => {
+    yellowStars.forEach(star => star.remove());
+
+    // نجوم بيضاء
+    for(let i=0; i<150; i++){
+      const s = document.createElement('div');
+      s.className='star-small';
+      s.style.top = Math.random()*100+'%';
+      s.style.left = Math.random()*100+'%';
+      s.style.width = s.style.height = (1 + Math.random()*2)+'px';
+      s.style.background = '#fff';
+      s.style.opacity = 0.7;
+      s.style.animationDuration = (3 + Math.random()*4)+'s';
+      document.body.appendChild(s);
+    }
+
+    // كلمات "love u ary"
+    for(let i=0; i<50; i++){
+      const w = document.createElement('div');
+      w.className='love-word';
+      w.innerText='love u ary';
+      w.style.top = Math.random()*100+'%';
+      w.style.left = Math.random()*100+'%';
+      w.style.fontSize = (10 + Math.random()*8)+'px';
+      w.style.animationDuration = (10 + Math.random()*10)+'s';
+      document.body.appendChild(w);
+    }
+
+  }, 1000);
+});
+// === تحقق تسجيل الدخول ===
 function checkLogin() {
-  const user = document.getElementById('username').value.trim();
-  const pass = document.getElementById('password').value.trim();
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
 
-  // صيغة اليوم
-  const today = new Date();
-  const dd = String(today.getDate()).padStart(2,'0');
-  const mm = String(today.getMonth()+1).padStart(2,'0');
-  const yyyy = today.getFullYear();
-  const variants = [dd+mm+yyyy, dd+'-'+mm+'-'+yyyy, yyyy+'-'+mm+'-'+dd, dd+mm];
-
-  if(user === 'Arej' && variants.includes(pass)) {
-    // إذا صح، ننتقل للصفحة الثانية
-    window.location.href = 'main.html';
+  if(username === "Arej" && password === "28112025") {
+    // تحويل لصفحة main.html
+    window.location.href = "main.html";
   } else {
-    alert('Wrong username or password.');
+    alert("Username or password incorrect!");
   }
 }
 </script>
-
 </body>
 </html>
