@@ -163,7 +163,47 @@ function revealGreeting(){
   g.animate([{opacity:0, transform:'translateY(20px)'},{opacity:1, transform:'translateY(0)'}], {duration:500, easing:'ease-out'});
 }
 </script>
+  <style>
+.video-container {
+  width: 90%;
+  max-width: 350px;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 
+    0 0 15px #ffd700,
+    0 0 25px #ffea00,
+    0 0 40px #fff700;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 
+      0 0 10px #ffd700,
+      0 0 20px #ffea00,
+      0 0 30px #fff700;
+  }
+  100% {
+    box-shadow: 
+      0 0 20px #ffea00,
+      0 0 35px #fff700,
+      0 0 60px #fff700;
+  }
+}
+
+.video-container video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+}
+</style>
+
+<div class="video-container">
+  <video src="IMG_6037.MOV" controls autoplay loop muted></video>
+</div>
 </body>
 
 </html>
+
 
